@@ -32,9 +32,13 @@ function aggregate(resources) {
       persons.shift();
     }
 
-    if (next !== undefined && next.type !== 'Person') {
+    if (next !== undefined) {
+      if (next.type !== 'Person') {
+        merged.push(persons[0]);
+        persons.length = 0;
+      }
+    } else {
       merged.push(persons[0]);
-      persons.length = 0;
     }
   });
 
@@ -72,4 +76,55 @@ const resources = [{
       }
     ];
 
-console.log(aggregate(resources));
+let aggregated = aggregate(resources);
+
+const root = document.getElementById('root');
+
+for (let r of aggregated) {
+  // create elements
+  let container = document.createElement('div');
+  let orderDisplay = document.createElement('div');
+  let dataDisplay = document.createElement('div');
+  let typeDisplay = document.createElement('div');
+  let nameDisplay = document.createElement('div');
+  let names = document.createElement('ul');
+
+  // add classes
+  container.classList.add('container');
+  orderDisplay.classList.add('order');
+  dataDisplay.classList.add('data');
+  typeDisplay.classList.add('type');
+  nameDisplay.classList.add('name');
+
+  // create text nodes
+  let orderText = document.createTextNode(r.order);
+  let typeText = document.createTextNode(r.type);
+
+  if (r.name !== undefined) {
+    let nameText = document.createTextNode(r.name);
+    let item = document.createElement('li');
+    item.appendChild(nameText);
+    names.appendChild(item);
+  } else {
+    for (let name of r.people) {
+      let nameText = document.createTextNode(name);
+      let item = document.createElement('li');
+      item.appendChild(nameText);
+      names.appendChild(item);
+    }
+  }
+
+  // add text nodes
+  orderDisplay.appendChild(orderText);
+  typeDisplay.appendChild(typeText);
+
+  // append children
+  nameDisplay.appendChild(names);
+  dataDisplay.appendChild(typeDisplay);
+  dataDisplay.appendChild(nameDisplay);
+  container.appendChild(orderDisplay);
+  container.appendChild(dataDisplay);
+
+  // add to page
+  root.appendChild(container);
+}
