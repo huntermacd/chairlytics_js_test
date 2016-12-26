@@ -1,6 +1,26 @@
 # Chartlytics Javascript Exercise
 
-This is my solution to Chairlytics' JavaScript exercise. I opted to keep this project as stripped-down as possible. Beyond using Babel for ES-next transpilation, I utilized no other imported modules. The UI will respond to changes in the `resources` dataset and flexbox and Font Awesome were used to clean up the display of the information. For example, if only one person is grouped in a `Person` type, a single user icon will show. Otherwise, a group of users icon will show. The original outline for the exercise is shown in full below.
+This is my solution to Chairlytics' JavaScript exercise. I opted to keep this project as stripped-down as possible. Beyond using Babel for ES-next transpilation, I utilized no other imported modules. The UI will respond to changes in the `resources` dataset and flexbox and Font Awesome were used to clean up the display of the information. For example, if only one person is grouped in a `Person` type, a single user icon will show. Otherwise, a group of users icon will show.
+
+## Run It
+
+To view the project with static data, you need only to clone the repo and open index.html.
+
+**If you would like to make changes to the dataset and see them reflected on the front-end:**
+
+You will need Node (https://nodejs.org/en/) and Yarn (https://yarnpkg.com/) installed. To begin, run:
+
+`yarn install`
+
+This will install the packages required to transpile the JS. Now you can make changes if you'd like.
+
+After making a change to the `resources` dataset in `src/script.js`, run:
+
+`yarn run build`
+
+This will run the Babel command to transpile the JS.
+
+**The original outline for the exercise is shown in full below.**
 
 ## Description
 
