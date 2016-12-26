@@ -84,21 +84,25 @@ for (let r of aggregated) {
   // create elements
   let container = document.createElement('div');
   let orderDisplay = document.createElement('div');
-  let dataDisplay = document.createElement('div');
+  let icon = document.createElement('i');
   let typeDisplay = document.createElement('div');
   let nameDisplay = document.createElement('div');
   let names = document.createElement('ul');
 
   // add classes
   container.classList.add('container');
-  orderDisplay.classList.add('order');
-  dataDisplay.classList.add('data');
-  typeDisplay.classList.add('type');
-  nameDisplay.classList.add('name');
+  icon.classList.add('fa');
+
+  if (r.type === 'Person') {
+    container.classList.add('person');
+    r.people.length > 1 ? icon.classList.add('fa-users') : icon.classList.add('fa-user');
+  } else {
+    container.classList.add('place');
+    icon.classList.add('fa-globe');
+  }
 
   // create text nodes
   let orderText = document.createTextNode(r.order);
-  let typeText = document.createTextNode(r.type);
 
   if (r.name !== undefined) {
     let nameText = document.createTextNode(r.name);
@@ -116,14 +120,13 @@ for (let r of aggregated) {
 
   // add text nodes
   orderDisplay.appendChild(orderText);
-  typeDisplay.appendChild(typeText);
 
   // append children
   nameDisplay.appendChild(names);
-  dataDisplay.appendChild(typeDisplay);
-  dataDisplay.appendChild(nameDisplay);
+  typeDisplay.appendChild(icon);
   container.appendChild(orderDisplay);
-  container.appendChild(dataDisplay);
+  container.appendChild(typeDisplay);
+  container.appendChild(nameDisplay);
 
   // add to page
   root.appendChild(container);
